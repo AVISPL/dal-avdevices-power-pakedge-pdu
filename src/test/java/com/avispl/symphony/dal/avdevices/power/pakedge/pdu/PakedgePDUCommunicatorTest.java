@@ -4,8 +4,42 @@
 
 package com.avispl.symphony.dal.avdevices.power.pakedge.pdu;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Map;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+import com.avispl.symphony.api.dal.dto.monitor.ExtendedStatistics;
 
 class PakedgePDUCommunicatorTest {
+	private PakedgePDUCommunicator pakedgePDUCommunicator;
 
+	@BeforeEach()
+	public void setUp() throws Exception {
+		pakedgePDUCommunicator = new PakedgePDUCommunicator();
+		pakedgePDUCommunicator.setHost("127.0.0.1");
+		pakedgePDUCommunicator.setPort(23);
+		pakedgePDUCommunicator.setLogin("su");
+		pakedgePDUCommunicator.setPassword("12345");
+		pakedgePDUCommunicator.init();
+	}
+
+	@AfterEach()
+	public void destroy() throws Exception {
+		pakedgePDUCommunicator.disconnect();
+	}
+
+	/**
+	 * Test get statistics: with System info
+	 *
+	 * @throws Exception When fail to getMultipleStatistics
+	 */
+	@Test
+	@Tag("RealDevice")
+	void testGetMultipleStatisticsWithSystemInfo() throws Exception {
+		ExtendedStatistics extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
+		Map<String, String> stats = extendedStatistics.getStatistics();
+	}
 }
