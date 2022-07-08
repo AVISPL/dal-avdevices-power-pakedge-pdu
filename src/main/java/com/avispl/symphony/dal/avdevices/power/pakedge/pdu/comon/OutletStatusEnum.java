@@ -14,9 +14,9 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
 public enum OutletStatusEnum {
 
 	STATUS("OutletStatus"),
-	POWER("Power (W)"),
-	CURRENT("Current (A)"),
-	PEAK("Peak (A)"),
+	POWER("Power(W)"),
+	CURRENT("Current(A)"),
+	PEAK("Peak(A)"),
 	IS_ALERTS("Alerts"),
 	RESET_PEAK("ResetPeak");
 

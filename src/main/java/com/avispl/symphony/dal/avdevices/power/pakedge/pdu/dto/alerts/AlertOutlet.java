@@ -2,7 +2,7 @@
  * Copyright (c) 2022 AVI-SPL, Inc. All Rights Reserved.
  */
 
-package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.outlets;
+package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.alerts;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

@@ -13,9 +13,10 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
  */
 public enum PDUDisplayEnum {
 
-
 	LED("LedState"),
 	OLED_ENABLE("OledState"),
+	APPLY_CHANGE("ApplyChange"),
+	CANCEL_CHANGE("CancelChange"),
 	OLED_CONTRAST("OledContrast");
 
 	public final String name;
@@ -36,5 +37,14 @@ public enum PDUDisplayEnum {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	public static PDUDisplayEnum getMetricByValue(String value) {
+		for (PDUDisplayEnum metric : PDUDisplayEnum.values()) {
+			if (metric.getName().equals(value)) {
+				return metric;
+			}
+		}
+		return null;
 	}
 }

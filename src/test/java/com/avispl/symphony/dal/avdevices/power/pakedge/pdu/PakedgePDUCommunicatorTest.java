@@ -24,6 +24,7 @@ class PakedgePDUCommunicatorTest {
 		pakedgePDUCommunicator.setLogin("su");
 		pakedgePDUCommunicator.setPassword("12345");
 		pakedgePDUCommunicator.init();
+		pakedgePDUCommunicator.connect();
 	}
 
 	@AfterEach()

@@ -4,7 +4,7 @@
 
 package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.outlets.AlertOutlet;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.alerts.AlertOutlet;
 
 /**
  * AlertsOutletWrapper class provides during the monitoring and controlling process

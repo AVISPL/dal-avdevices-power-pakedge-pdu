@@ -2,28 +2,33 @@
  * Copyright (c) 2022 AVI-SPL, Inc. All Rights Reserved.
  */
 
-package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command;
+package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dropdownlist;
 
 /**
- * CommandControl class defined the enum for controlling process
+ * DaysEnum  class defined the enum for monitoring and controlling process
  *
  * @author Harry / Symphony Dev Team<br>
- * Created on 6/30/2022
+ * Created on 7/4/2022
  * @since 1.0.0
  */
-public enum CommandControl {
+public enum DaysEnum {
 
-	SET("set "),
-	SET_PDU_DISPLAY("set pdu-display");
+	MON("Mon"),
+	TUES("Tue"),
+	WED("Wed"),
+	THU("Thu"),
+	FRI("Fri"),
+	SAT("Sat"),
+	SUN("Sun");
 
 	public final String name;
 
 	/**
-	 * CommandControl instantiation
+	 * DaysEnum instantiation
 	 *
 	 * @param name {@code {@link #name}}
 	 */
-	CommandControl(String name) {
+	DaysEnum(String name) {
 		this.name = name;
 	}
 

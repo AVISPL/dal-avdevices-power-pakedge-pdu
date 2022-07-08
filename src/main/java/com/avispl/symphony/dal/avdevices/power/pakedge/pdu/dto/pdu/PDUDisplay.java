@@ -19,7 +19,6 @@ import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUDisplayEnum;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PDUDisplay {
-
 	private String led;
 
 	@JsonAlias("oled_enabled")
