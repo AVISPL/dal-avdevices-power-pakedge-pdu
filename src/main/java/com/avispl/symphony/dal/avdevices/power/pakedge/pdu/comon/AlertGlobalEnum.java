@@ -26,7 +26,9 @@ public enum AlertGlobalEnum {
 	CURRENT_MIN("CurrentMin"),
 	VOLTAGE_ALERT("VoltageAlert"),
 	VOLTAGE_MAX("VoltageMax"),
-	VOLTAGE_MIN("VoltageMin");
+	VOLTAGE_MIN("VoltageMin"),
+	CANCEL("CancelChange"),
+	APPLY_CHANGE("ApplyChange")	;
 
 	public final String name;
 

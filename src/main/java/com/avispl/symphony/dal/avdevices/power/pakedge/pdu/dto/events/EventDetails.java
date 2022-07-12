@@ -17,6 +17,7 @@ import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUConstant;
 public class EventDetails {
 
 	private String id;
+	private String outletId;
 	private String time;
 	private String[] days;
 	private String action;
@@ -37,6 +38,24 @@ public class EventDetails {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	/**
+	 * Retrieves {@code {@link #outletId}}
+	 *
+	 * @return value of {@link #outletId}
+	 */
+	public String getOutletId() {
+		return outletId;
+	}
+
+	/**
+	 * Sets {@code outletId}
+	 *
+	 * @param outletId the {@code java.lang.String} field
+	 */
+	public void setOutletId(String outletId) {
+		this.outletId = outletId;
 	}
 
 	/**
@@ -62,12 +81,8 @@ public class EventDetails {
 	 *
 	 * @return value of {@link #days}
 	 */
-	public String getDays() {
-		String result = "";
-		for (String day : days) {
-			result = result + day;
-		}
-		return result;
+	public String[] getDays() {
+		return days;
 	}
 
 	/**
@@ -107,8 +122,6 @@ public class EventDetails {
 		switch (metric) {
 			case ACTION:
 				return getAction();
-			case DAYS:
-				return getDays();
 			case ID:
 				return getId();
 			case TIME:

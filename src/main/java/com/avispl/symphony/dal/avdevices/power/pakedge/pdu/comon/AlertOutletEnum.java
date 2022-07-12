@@ -18,7 +18,9 @@ public enum AlertOutletEnum {
 	CURRENT_ALERT("CurrentAlertType"),
 	POWER_MIN("PowerMin"),
 	POWER_MAX("PowerMax"),
-	POWER_ALERT("PowerAlertType");
+	POWER_ALERT("PowerAlertType"),
+	APPLY_CHANGE("ApplyChange"),
+	CANCEL("CancelChange");
 
 	public final String name;
 

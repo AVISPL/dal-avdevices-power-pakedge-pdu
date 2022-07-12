@@ -13,13 +13,15 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dropdownlist;
  */
 public enum DaysEnum {
 
+	NONE("None"),
 	MON("Mon"),
 	TUES("Tue"),
 	WED("Wed"),
 	THU("Thu"),
 	FRI("Fri"),
 	SAT("Sat"),
-	SUN("Sun");
+	SUN("Sun"),
+	;
 
 	public final String name;
 

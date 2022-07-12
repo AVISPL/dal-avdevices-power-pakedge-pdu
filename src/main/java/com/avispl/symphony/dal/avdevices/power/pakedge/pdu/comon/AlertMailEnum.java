@@ -14,6 +14,8 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
 public enum AlertMailEnum {
 
 	RECIPIENT("Recipient"),
+	APPLY_CHANGE("ApplyChange"),
+	CANCEL_CHANGE("CancelChange"),
 	SUBJECT("Subject");
 
 	public final String name;
@@ -34,5 +36,20 @@ public enum AlertMailEnum {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * Get metric name by value of it
+	 *
+	 * @param value the value is value of metric name
+	 * @return metric instance
+	 */
+	public static AlertMailEnum getMetricByValue(String value) {
+		for (AlertMailEnum metric : AlertMailEnum.values()) {
+			if (metric.getName().equals(value)) {
+				return metric;
+			}
+		}
+		return null;
 	}
 }

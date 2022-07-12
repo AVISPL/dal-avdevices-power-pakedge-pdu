@@ -17,8 +17,9 @@ public enum OutletScheduleEnum {
 	TIME("Time"),
 	DAYS("Day0"),
 	ADD_DAY("AddDay"),
-	CREATE_EVENT("CreateEvent"),
-	ACTION("Action");
+	ACTION("Action"),
+	APPLY_CHANGE("ApplyChange"),
+	CANCEL("CancelChange");
 
 	public final String name;
 

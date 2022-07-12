@@ -38,6 +38,26 @@ public class AlertOutlet {
 	@JsonAlias("power_alert")
 	private String[] powerAlert;
 
+	private String id;
+
+	/**
+	 * Retrieves {@code {@link #id}}
+	 *
+	 * @return value of {@link #id}
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * Sets {@code id}
+	 *
+	 * @param id the {@code java.lang.String} field
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	/**
 	 * Retrieves {@code {@link #currentMin}}
 	 *

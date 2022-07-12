@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import com.avispl.symphony.api.dal.dto.control.ControllableProperty;
 import com.avispl.symphony.api.dal.dto.monitor.ExtendedStatistics;
 
 class PakedgePDUCommunicatorTest {
@@ -42,5 +43,27 @@ class PakedgePDUCommunicatorTest {
 	void testGetMultipleStatisticsWithSystemInfo() throws Exception {
 		ExtendedStatistics extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
 		Map<String, String> stats = extendedStatistics.getStatistics();
+		ControllableProperty controllableProperty = new ControllableProperty();
+		String property ="OutletScheduler1Events#AddDay";
+		String value = "1";
+		controllableProperty.setProperty(property);
+		controllableProperty.setValue(value);
+		pakedgePDUCommunicator.controlProperty(controllableProperty);
+		 property ="OutletScheduler1Events#AddDay";
+		 value = "1";
+		controllableProperty.setProperty(property);
+		controllableProperty.setValue(value);
+		pakedgePDUCommunicator.controlProperty(controllableProperty);
+		property ="OutletScheduler1Events#AddDay";
+		value = "1";
+		controllableProperty.setProperty(property);
+		controllableProperty.setValue(value);
+		pakedgePDUCommunicator.controlProperty(controllableProperty);
+		property ="OutletScheduler1Events#AddDay";
+		value = "1";
+		controllableProperty.setProperty(property);
+		controllableProperty.setValue(value);
+		pakedgePDUCommunicator.controlProperty(controllableProperty);
+
 	}
 }

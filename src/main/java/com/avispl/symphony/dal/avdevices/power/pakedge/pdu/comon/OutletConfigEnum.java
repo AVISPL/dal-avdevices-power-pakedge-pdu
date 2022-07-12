@@ -16,7 +16,9 @@ public enum OutletConfigEnum {
 	NAME("OutletName"),
 	LOCAL_REBOOT("LocalRebootState"),
 	POWER_ON_DELAY("PowerOnDelay"),
-	POWER_OFF_DELAY("PowerOffDelay");
+	POWER_OFF_DELAY("PowerOffDelay"),
+	APPLY_CHANGE("ApplyChange"),
+	CANCEL("CancelChange");
 
 	public final String name;
 

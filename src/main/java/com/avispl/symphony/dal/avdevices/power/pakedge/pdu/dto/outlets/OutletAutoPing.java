@@ -16,6 +16,7 @@ import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUConstant;
  */
 public class OutletAutoPing {
 
+	private String id;
 	private String enabled;
 	private String destination;
 	private String timeout;
@@ -25,6 +26,24 @@ public class OutletAutoPing {
 	private String attempts;
 	private String notification;
 	private String status;
+
+	/**
+	 * Retrieves {@code {@link #id}}
+	 *
+	 * @return value of {@link #id}
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * Sets {@code id}
+	 *
+	 * @param id the {@code java.lang.String} field
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	/**
 	 * Retrieves {@code {@link #enabled}}
@@ -200,7 +219,7 @@ public class OutletAutoPing {
 				return getAttempts();
 			case DESTINATION:
 				return getDestination();
-			case ENABLE:
+			case OUTLET_STATE:
 				return getEnabled();
 			case INTERVAL:
 				return getInterval();

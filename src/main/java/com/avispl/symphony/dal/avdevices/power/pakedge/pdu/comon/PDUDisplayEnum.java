@@ -38,13 +38,4 @@ public enum PDUDisplayEnum {
 	public String getName() {
 		return name;
 	}
-
-	public static PDUDisplayEnum getMetricByValue(String value) {
-		for (PDUDisplayEnum metric : PDUDisplayEnum.values()) {
-			if (metric.getName().equals(value)) {
-				return metric;
-			}
-		}
-		return null;
-	}
 }

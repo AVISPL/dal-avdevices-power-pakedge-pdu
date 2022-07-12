@@ -13,14 +13,16 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
  */
 public enum OutletAutoPingEnum {
 
-	ENABLE("OutletState"),
+	OUTLET_STATE("OutletState"),
 	DESTINATION("Destination"),
 	TIMEOUT("Timeout"),
 	INTERVAL("Interval"),
 	LIMIT("Limit"),
 	PERIOD("Period"),
 	ATTEMPTS("Attempts"),
-	NOTIFICATION("Notification");
+	NOTIFICATION("Notification"),
+	APPLY_CHANGE("ApplyChange"),
+	CANCEL("CancelChange");
 
 	public final String name;
 

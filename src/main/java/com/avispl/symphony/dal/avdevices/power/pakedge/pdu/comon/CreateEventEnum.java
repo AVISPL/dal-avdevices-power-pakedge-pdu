@@ -15,8 +15,10 @@ public enum CreateEventEnum {
 
 	OUTLET_ID("OutletID"),
 	START_TIME("StartTime"),
-	DAY_DEFAULT("Day0"),
+	DAY_0("Day0"),
 	ADD_DAY("AddDay"),
+	CREATE_EVENT("CreateEvent"),
+	CANCEL("CancelChange"),
 	ACTION("Action");
 
 	public final String name;

@@ -13,8 +13,14 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command;
  */
 public enum CommandControl {
 
-	SET("set "),
-	SET_PDU_DISPLAY("set pdu-display");
+	SET_PDU_DISPLAY("set pdu-display"),
+	SET_ALERT_EMAIL("set alerts-email"),
+	SET_ALERT_GLOBAL("set alerts-global"),
+	SET_ALERT_OUTLET("set alerts-outlet"),
+	SET_OUTLET_CONFIG("set outlet-conf"),
+	SET_OUTLET_AUTO_PING("set outlet-auto-ping"),
+	SET_OUTLET_SCHEDULER("set outlet-scheduler"),
+	;
 
 	public final String name;
 
