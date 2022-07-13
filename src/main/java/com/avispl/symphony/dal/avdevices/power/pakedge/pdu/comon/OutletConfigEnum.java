@@ -13,6 +13,7 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
  */
 public enum OutletConfigEnum {
 
+	OUTLET_STATUS("OutletStatus"),
 	NAME("OutletName"),
 	LOCAL_REBOOT("LocalRebootState"),
 	POWER_ON_DELAY("PowerOnDelay"),

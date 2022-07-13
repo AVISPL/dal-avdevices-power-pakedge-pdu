@@ -20,6 +20,9 @@ public enum CommandControl {
 	SET_OUTLET_CONFIG("set outlet-conf"),
 	SET_OUTLET_AUTO_PING("set outlet-auto-ping"),
 	SET_OUTLET_SCHEDULER("set outlet-scheduler"),
+	SET_RESET_PEAK("set outlet-peak-reset"),
+	SET_POWER_STATUS("set outlet-power"),
+	SET_TEMP_UNIT(" set temperature-unit")
 	;
 
 	public final String name;

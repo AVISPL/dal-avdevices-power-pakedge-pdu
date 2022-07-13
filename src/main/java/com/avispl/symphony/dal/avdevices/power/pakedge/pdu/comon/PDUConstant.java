@@ -19,6 +19,7 @@ public class PDUConstant {
 	public static final String TRUE = "True";
 	public static final String SPACE = " ";
 	public static final String EMPTY_STRING = "";
+	public static final String COMMA = ",";
 	public static final String ENABLE = "Enable";
 	public static final String DISABLE = "Disable";
 	public static final String OFF = "Off";
@@ -69,6 +70,7 @@ public class PDUConstant {
 	public static final String PARAM_DASH_O = " -o ";
 	public static final String PARAM_DASH_N = " -n ";
 	public static final String PARAM_DASH_I = " -i ";
+	public static final String PARAM_DASH_U = " -u ";
 	public static final String[] OUTLET_ID_LIST = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 	public static final int MIN_LIMIT = 5;
 	public static final int MAX_LIMIT = 240;

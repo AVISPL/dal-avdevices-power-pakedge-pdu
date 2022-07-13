@@ -13,6 +13,7 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
  */
 public enum PDUDisplayEnum {
 
+	TEMPERATURE_UNIT("TemperatureUnit"),
 	LED("LedState"),
 	OLED_ENABLE("OledState"),
 	APPLY_CHANGE("ApplyChange"),

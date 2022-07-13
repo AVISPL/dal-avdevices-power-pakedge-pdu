@@ -23,6 +23,7 @@ public class OutletConfig {
 
 	private String name;
 	private String id;
+	private String status;
 
 	@JsonAlias("local_reboot")
 	private String localReboot;
@@ -121,6 +122,24 @@ public class OutletConfig {
 	 */
 	public void setPowerOffDelay(String powerOffDelay) {
 		this.powerOffDelay = powerOffDelay;
+	}
+
+	/**
+	 * Retrieves {@code {@link #status}}
+	 *
+	 * @return value of {@link #status}
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * Sets {@code status}
+	 *
+	 * @param status the {@code java.lang.String} field
+	 */
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	/**

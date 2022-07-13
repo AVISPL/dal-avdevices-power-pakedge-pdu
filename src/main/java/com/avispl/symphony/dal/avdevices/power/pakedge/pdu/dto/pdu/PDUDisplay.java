@@ -19,7 +19,9 @@ import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUDisplayEnum;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PDUDisplay {
+
 	private String led;
+	private String temp_unit;
 
 	@JsonAlias("oled_enabled")
 	private String oledEnabled;
@@ -79,6 +81,24 @@ public class PDUDisplay {
 	 */
 	public void setOledContrast(String oledContrast) {
 		this.oledContrast = oledContrast;
+	}
+
+	/**
+	 * Retrieves {@code {@link #temp_unit}}
+	 *
+	 * @return value of {@link #temp_unit}
+	 */
+	public String getTemp_unit() {
+		return temp_unit;
+	}
+
+	/**
+	 * Sets {@code temp_unit}
+	 *
+	 * @param temp_unit the {@code java.lang.String} field
+	 */
+	public void setTemp_unit(String temp_unit) {
+		this.temp_unit = temp_unit;
 	}
 
 	/**
