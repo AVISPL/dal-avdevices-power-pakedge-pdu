@@ -4,6 +4,9 @@
 
 package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.alerts;
 
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
+
 /**
  * AlertMail class provides during the monitoring and controlling process
  *
@@ -11,7 +14,7 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.alerts;
  * Created on 6/30/2022
  * @since 1.0.0
  */
-public class AlertMail {
+public class AlertEMail {
 
 	private String recipient;
 	private String subject;
@@ -50,5 +53,15 @@ public class AlertMail {
 	 */
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+
+	/***
+	 * Build param request for the AlertMail
+	 *
+	 * @return String is param of AlertMail
+	 */
+	public String getParamRequestOfAlertMail() {
+		//command control set alerts-email -r <recipient> -s <subject>
+		return CommandControl.SET_ALERT_EMAIL.getName() + String.format(PDUConstant.PARAM_ALERT_EMAIL, recipient, subject);
 	}
 }

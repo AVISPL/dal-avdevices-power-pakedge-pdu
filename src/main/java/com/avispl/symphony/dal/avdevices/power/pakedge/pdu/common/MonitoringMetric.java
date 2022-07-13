@@ -2,7 +2,7 @@
  * Copyright (c) 2022 AVI-SPL, Inc. All Rights Reserved.
  */
 
-package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
+package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common;
 
 /**
  * MonitoringMetric  class defined the enum for monitoring and controlling process
@@ -15,7 +15,7 @@ public enum MonitoringMetric {
 
 	DEVICE_INFO("DeviceInfo"),
 	TIMEZONE("Timezone"),
-	TIME("Time"),
+	START_TIME("Time"),
 	UPTIME("Uptime"),
 	NETWORK_INFORMATION("NetworkInformation"),
 	PDU_DISPLAY("PDUDisplay"),

@@ -7,8 +7,10 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.alerts;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.AlertGlobalEnum;
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.AlertGlobalEnum;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dropdownlist.EnumTypeHandler;
 
 /**
  * AlertGlobal class provides during the monitoring and controlling process
@@ -103,12 +105,9 @@ public class AlertGlobal {
 	 *
 	 * @return value of {@link #voltageAlert}
 	 */
-	public String getVoltageAlert() {
-		String result = "";
-		for (String value : voltageAlert) {
-			result = result + value;
-		}
-		return result;
+	public String[] getVoltageAlert() {
+
+		return voltageAlert;
 	}
 
 	/**
@@ -161,12 +160,8 @@ public class AlertGlobal {
 	 *
 	 * @return value of {@link #currentAlert}
 	 */
-	public String getCurrentAlert() {
-		String result = "";
-		for (String value : currentAlert) {
-			result = result + value;
-		}
-		return result;
+	public String[] getCurrentAlert() {
+		return currentAlert;
 	}
 
 	/**
@@ -219,12 +214,8 @@ public class AlertGlobal {
 	 *
 	 * @return value of {@link #powerAlert}
 	 */
-	public String getPowerAlert() {
-		String result = "";
-		for (String value : powerAlert) {
-			result = result + value;
-		}
-		return result;
+	public String[] getPowerAlert() {
+		return powerAlert;
 	}
 
 	/**
@@ -313,12 +304,8 @@ public class AlertGlobal {
 	 *
 	 * @return value of {@link #tempAlert}
 	 */
-	public String getTempAlert() {
-		String result = "";
-		for (String value : tempAlert) {
-			result = result + value;
-		}
-		return result;
+	public String[] getTempAlert() {
+		return tempAlert;
 	}
 
 	/**
@@ -328,6 +315,21 @@ public class AlertGlobal {
 	 */
 	public void setTempAlert(String[] tempAlert) {
 		this.tempAlert = tempAlert;
+	}
+
+	/***
+	 * Build param request for the AlertGlobal
+	 *
+	 * @return String is param of AlertGlobal
+	 */
+	public String getParamRequestOfAlertGlobal() {
+		//set alerts-global - a <voltageMin> -b <voltageMax> -c <alertType> -d <powMin> -e <powMax>
+		//-f <alertType> -l <tempMin> -h <tempMax> -t <alertType> -p <currentMin> -q <currentMax>
+		//-r <alertType
+		return CommandControl.SET_ALERT_GLOBAL.getName() +
+				String.format(PDUConstant.PARAM_ALERT_GLOBAL, voltageMin, voltageMax, EnumTypeHandler.getValueByStringArray(getVoltageAlert()), powerMin, powerMax,
+						EnumTypeHandler.getValueByStringArray(getPowerAlert()), tempMin, tempMax, EnumTypeHandler.getValueByStringArray(getTempAlert()), currentMin, currentMax,
+						EnumTypeHandler.getValueByStringArray(getCurrentAlert()));
 	}
 
 	/**
@@ -341,7 +343,7 @@ public class AlertGlobal {
 			case TEMP_SENSOR:
 				return getTempSensor();
 			case TEMP_ALERT:
-				return getTempAlert();
+				return EnumTypeHandler.getValueByStringArray(getTempAlert());
 			case TEMP_UNIT:
 				return getTempUnit();
 			case TEMP_MAX:
@@ -353,15 +355,15 @@ public class AlertGlobal {
 			case POWER_MIN:
 				return getPowerMin();
 			case POWER_ALERT:
-				return getPowerAlert();
+				return EnumTypeHandler.getValueByStringArray(getPowerAlert());
 			case CURRENT_ALERT:
-				return getCurrentAlert();
+				return EnumTypeHandler.getValueByStringArray(getCurrentAlert());
 			case CURRENT_MAX:
 				return getCurrentMax();
 			case CURRENT_MIN:
 				return getCurrentMin();
 			case VOLTAGE_ALERT:
-				return getVoltageAlert();
+				return EnumTypeHandler.getValueByStringArray(getVoltageAlert());
 			case VOLTAGE_MAX:
 				return getVoltageMax();
 			case VOLTAGE_MIN:

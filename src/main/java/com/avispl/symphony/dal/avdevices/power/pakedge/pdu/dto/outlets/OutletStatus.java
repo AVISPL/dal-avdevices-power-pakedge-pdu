@@ -7,8 +7,8 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.outlets;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.OutletStatusEnum;
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.OutletStatusEnum;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
 
 /**
  * OutletStatus class provides during the monitoring and controlling process

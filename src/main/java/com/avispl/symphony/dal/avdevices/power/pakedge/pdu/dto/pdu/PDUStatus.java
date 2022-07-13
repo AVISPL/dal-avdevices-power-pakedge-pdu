@@ -6,8 +6,8 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.pdu;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUConstant;
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUStatusEnum;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUStatusEnum;
 
 /**
  * Info class provides during the monitoring and controlling process

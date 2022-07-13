@@ -2,32 +2,33 @@
  * Copyright (c) 2022 AVI-SPL, Inc. All Rights Reserved.
  */
 
-package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
+package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common;
 
 /**
- * OutletStatusEnum  class defined the enum for monitoring and controlling process
+ * PDUStatusEnum  class defined the enum for monitoring and controlling process
  *
  * @author Harry / Symphony Dev Team<br>
  * Created on 6/30/2022
  * @since 1.0.0
  */
-public enum OutletStatusEnum {
+public enum PDUStatusEnum {
 
-	STATUS("OutletStatus"),
-	POWER("Power(W)"),
+	VOLTAGE("Voltage(V)"),
 	CURRENT("Current(A)"),
-	PEAK("Peak(A)"),
-	IS_ALERTS("Alerts"),
-	RESET_PEAK("ResetPeak");
+	FREQUENCY("Frequency(Hz)"),
+	TEMPERATURE("Temperature"),
+	HUMIDITY("Humidity(%)"),
+	ALERT("Alerts"),
+	TEMPERATURE_UNIT("TemperatureUnit");
 
 	public final String name;
 
 	/**
-	 * OutletStatusEnum instantiation
+	 * DeviceInfoMetric instantiation
 	 *
 	 * @param name {@code {@link #name}}
 	 */
-	OutletStatusEnum(String name) {
+	PDUStatusEnum(String name) {
 		this.name = name;
 	}
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.avispl.symphony.api.dal.error.ResourceNotReachableException;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
 
 /**
  * EnumTypeHandler class provides during the monitoring and controlling process
@@ -59,5 +60,22 @@ public class EnumTypeHandler {
 		} catch (Exception e) {
 			throw new ResourceNotReachableException(e.getMessage(), e);
 		}
+	}
+
+	/**
+	 * Get toString value by Array
+	 *
+	 * @param array is Array Object instance
+	 * @return String is all value of array
+	 */
+	public static String getValueByStringArray(String[] array) {
+		String result = PDUConstant.EMPTY_STRING;
+		if (array != null) {
+			for (String value : array) {
+				result = result + value;
+			}
+			return result;
+		}
+		return result;
 	}
 }

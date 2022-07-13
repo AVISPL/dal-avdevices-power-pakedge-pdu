@@ -2,34 +2,33 @@
  * Copyright (c) 2022 AVI-SPL, Inc. All Rights Reserved.
  */
 
-package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
+package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common;
 
 /**
- * AlertsOutletEnum  class defined the enum for monitoring and controlling process
+ * OutletConfigEnum  class defined the enum for monitoring and controlling process
  *
  * @author Harry / Symphony Dev Team<br>
  * Created on 6/30/2022
  * @since 1.0.0
  */
-public enum AlertOutletEnum {
+public enum OutletConfigEnum {
 
-	CURRENT_MIN("CurrentMin"),
-	CURRENT_MAX("CurrentMax"),
-	CURRENT_ALERT("CurrentAlertType"),
-	POWER_MIN("PowerMin"),
-	POWER_MAX("PowerMax"),
-	POWER_ALERT("PowerAlertType"),
+	OUTLET_STATUS("OutletStatus"),
+	NAME("OutletName"),
+	LOCAL_REBOOT("LocalRebootState"),
+	POWER_ON_DELAY("PowerOnDelay"),
+	POWER_OFF_DELAY("PowerOffDelay"),
 	APPLY_CHANGE("ApplyChange"),
 	CANCEL("CancelChange");
 
 	public final String name;
 
 	/**
-	 * AlertsOutletEnum instantiation
+	 * OutletConfigEnum instantiation
 	 *
 	 * @param name {@code {@link #name}}
 	 */
-	AlertOutletEnum(String name) {
+	OutletConfigEnum(String name) {
 		this.name = name;
 	}
 

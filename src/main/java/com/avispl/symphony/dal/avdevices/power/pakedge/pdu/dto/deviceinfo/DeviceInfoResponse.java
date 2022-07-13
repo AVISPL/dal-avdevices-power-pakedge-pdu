@@ -7,8 +7,8 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.deviceinfo;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.DeviceInfoEmum;
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.DeviceInfoEmum;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
 
 /**
  * DeviceInfoResponse class provides during the monitoring and controlling process

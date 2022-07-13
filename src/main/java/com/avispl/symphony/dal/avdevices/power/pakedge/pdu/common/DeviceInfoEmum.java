@@ -2,24 +2,22 @@
  * Copyright (c) 2022 AVI-SPL, Inc. All Rights Reserved.
  */
 
-package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
+package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common;
 
 /**
- * PDUStatusEnum  class defined the enum for monitoring and controlling process
+ * DeviceInfoMetric  class defined the enum for monitoring and controlling process
  *
  * @author Harry / Symphony Dev Team<br>
  * Created on 6/30/2022
  * @since 1.0.0
  */
-public enum PDUStatusEnum {
+public enum DeviceInfoEmum {
 
-	VOLTAGE("Voltage(V)"),
-	CURRENT("Current(A)"),
-	FREQUENCY("Frequency(Hz)"),
-	TEMPERATURE("Temperature"),
-	HUMIDITY("Humidity(%)"),
-	ALERT("Alerts"),
-	TEMPERATURE_UNIT("TemperatureUnit");
+	MODEL("Model"),
+	HOSTNAME("HostName"),
+	FIRMWARE_VERSION("FirmwareVersion"),
+	SERIAL_NUMBER("SerialNumber"),
+	MAC("MAC");
 
 	public final String name;
 
@@ -28,7 +26,7 @@ public enum PDUStatusEnum {
 	 *
 	 * @param name {@code {@link #name}}
 	 */
-	PDUStatusEnum(String name) {
+	DeviceInfoEmum(String name) {
 		this.name = name;
 	}
 

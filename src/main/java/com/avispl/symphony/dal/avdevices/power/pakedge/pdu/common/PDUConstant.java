@@ -2,7 +2,7 @@
  * Copyright (c) 2022 AVI-SPL, Inc. All Rights Reserved.
  */
 
-package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
+package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common;
 
 /**
  * PDUConstant class provides during the monitoring and controlling process
@@ -54,22 +54,8 @@ public class PDUConstant {
 	public static final String ERROR = "Error";
 	public static final String REGEX_DATA = "\r\n";
 	public static final String PARAM_DASH_V = " -v ";
-	public static final String PARAM_DASH_C = " -c ";
-	public static final String PARAM_DASH_L = " -l ";
-	public static final String PARAM_DASH_R = " -r ";
-	public static final String PARAM_DASH_S = " -s ";
-	public static final String PARAM_DASH_A = " -a ";
-	public static final String PARAM_DASH_B = " -b ";
-	public static final String PARAM_DASH_D = " -d ";
-	public static final String PARAM_DASH_E = " -e ";
-	public static final String PARAM_DASH_F = " -f ";
-	public static final String PARAM_DASH_H = " -h ";
-	public static final String PARAM_DASH_T = " -t ";
-	public static final String PARAM_DASH_Q = " -q ";
-	public static final String PARAM_DASH_P = " -p ";
 	public static final String PARAM_DASH_O = " -o ";
-	public static final String PARAM_DASH_N = " -n ";
-	public static final String PARAM_DASH_I = " -i ";
+	public static final String PARAM_DASH_R = " -r ";
 	public static final String PARAM_DASH_U = " -u ";
 	public static final String[] OUTLET_ID_LIST = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 	public static final int MIN_LIMIT = 5;
@@ -97,4 +83,12 @@ public class PDUConstant {
 	public static final int ZERO = 0;
 	public static final int NUMBER_TWO = 2;
 	public static final int EVENT_DAYS_MAX = 6;
+	public static final String PARAM_ALERT_GLOBAL = " -a %s -b %s -c %s -d %s -e %s -f %s -l %s -h %s -t %s -p %s -q %s -r %s";
+	public static final String PARAM_ALERT_EMAIL = " -r %s -s %s";
+	public static final String PARAM_ALERT_OUTLET = " -o %s -a %s -v %s -c %s -d %s -e %s -f %s";
+	public static final String PARAM_OUTLET_EVENT = " -o %s %s -s %s -d %s -a %s";
+	public static final String PARAM_OUTLET_AUTO_PING = " -o %s -e %s -d %s -t %s -i %s -l %s -p %s -a %s -n %s";
+	public static final String PARAM_OUTLET_CONFIG = " -o %s -n %s -b %s -d %s -f %s";
+	public static final String PARAM_PDU_DISPLAY = " -v %s -c %s -l %s";
+
 }

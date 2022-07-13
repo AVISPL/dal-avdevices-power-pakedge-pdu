@@ -4,8 +4,9 @@
 
 package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.outlets;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.OutletAutoPingEnum;
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.OutletAutoPingEnum;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
 
 /**
  * OutletAutoPing class provides during the monitoring and controlling process
@@ -205,6 +206,16 @@ public class OutletAutoPing {
 	 */
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	/***
+	 * Build param request for the Outlet Auto Ping
+	 *
+	 * @return String is param of Outlet Auto Ping
+	 */
+	public String getParamRequestOfOutletAutoPing() {
+		//set outlet-auto-ping -o <outletNo> -e <enabled> -d <destination> -t <time-out> -i <interval> -l <limit> -p <period> -a <attempts> -n <notification>
+		return CommandControl.SET_OUTLET_AUTO_PING.getName() + String.format(PDUConstant.PARAM_OUTLET_AUTO_PING, id, enabled, destination, timeout, interval, limit, period, attempts, notification);
 	}
 
 	/**

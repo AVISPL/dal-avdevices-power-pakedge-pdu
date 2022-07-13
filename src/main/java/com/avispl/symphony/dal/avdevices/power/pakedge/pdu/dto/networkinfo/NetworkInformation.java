@@ -4,8 +4,8 @@
 
 package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.networkinfo;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.NetworkInfoEnum;
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.NetworkInfoEnum;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
 
 /**
  * NetworkInformation class provides during the monitoring and controlling process

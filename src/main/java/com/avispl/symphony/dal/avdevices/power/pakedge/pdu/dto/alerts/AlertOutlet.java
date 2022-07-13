@@ -7,8 +7,10 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.alerts;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.AlertOutletEnum;
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.AlertOutletEnum;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dropdownlist.EnumTypeHandler;
 
 /**
  * AlertOutlet class provides during the monitoring and controlling process
@@ -99,12 +101,8 @@ public class AlertOutlet {
 	 *
 	 * @return value of {@link #currentAlert}
 	 */
-	public String getCurrentAlert() {
-		String result = "";
-		for (String item : currentAlert) {
-			result = result + item;
-		}
-		return result;
+	public String[] getCurrentAlert() {
+		return currentAlert;
 	}
 
 	/**
@@ -157,12 +155,8 @@ public class AlertOutlet {
 	 *
 	 * @return value of {@link #powerAlert}
 	 */
-	public String getPowerAlert() {
-		String result = "";
-		for (String item : powerAlert) {
-			result = result + item;
-		}
-		return result;
+	public String[] getPowerAlert() {
+		return powerAlert;
 	}
 
 	/**
@@ -174,6 +168,18 @@ public class AlertOutlet {
 		this.powerAlert = powerAlert;
 	}
 
+	/***
+	 * Build param request for the AlertOutlet
+	 *
+	 * @return String is param of AlertOutlet
+	 */
+	public String getParamRequestOfAlertOutlet() {
+		// set alerts-outlet -o <outletNo> -a <currentMin> -b <currentMax> -c <alertTtype> -d
+		//<powMin> -e <powMax> -f <alertTtype>
+		return CommandControl.SET_ALERT_OUTLET.getName() + String.format(PDUConstant.PARAM_ALERT_OUTLET, id, currentMin, currentMax, EnumTypeHandler.getValueByStringArray(getCurrentAlert()), powerMin,
+				powerMax, EnumTypeHandler.getValueByStringArray(getPowerAlert()));
+	}
+
 	/**
 	 * Get the value by the metric monitoring
 	 *
@@ -183,7 +189,7 @@ public class AlertOutlet {
 	public String getValueByMetric(AlertOutletEnum metric) {
 		switch (metric) {
 			case CURRENT_ALERT:
-				return getCurrentAlert();
+				return EnumTypeHandler.getValueByStringArray(getCurrentAlert());
 			case CURRENT_MIN:
 				return getCurrentMin();
 			case CURRENT_MAX:
@@ -193,7 +199,7 @@ public class AlertOutlet {
 			case POWER_MAX:
 				return getPowerMax();
 			case POWER_ALERT:
-				return getPowerAlert();
+				return EnumTypeHandler.getValueByStringArray(getPowerAlert());
 			default:
 				return PDUConstant.NONE;
 		}

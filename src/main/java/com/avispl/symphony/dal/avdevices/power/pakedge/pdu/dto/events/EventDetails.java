@@ -4,8 +4,10 @@
 
 package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.events;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.OutletScheduleEnum;
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.OutletScheduleEnum;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
+import com.avispl.symphony.dal.util.StringUtils;
 
 /**
  * EventDetails class provides during the monitoring and controlling process
@@ -110,6 +112,20 @@ public class EventDetails {
 	 */
 	public void setAction(String action) {
 		this.action = action;
+	}
+
+	/***
+	 * Build param request for the Event Details
+	 *
+	 * @return String is param of Event Details
+	 */
+	public String getParamRequestOfEventDetails() {
+		//set outlet-scheduler -o <outletNo> [-r<eventID>] -s <start_time> -d <days> -a <action>
+		String eventId = String.format("-r %s", id);
+		if (StringUtils.isNullOrEmpty(id)) {
+			eventId = PDUConstant.EMPTY_STRING;
+		}
+		return CommandControl.SET_OUTLET_SCHEDULER.getName() + String.format(PDUConstant.PARAM_OUTLET_EVENT, outletId, eventId, time, days, action);
 	}
 
 	/**

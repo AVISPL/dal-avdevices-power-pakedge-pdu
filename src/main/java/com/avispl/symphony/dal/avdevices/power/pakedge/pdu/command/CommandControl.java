@@ -22,7 +22,8 @@ public enum CommandControl {
 	SET_OUTLET_SCHEDULER("set outlet-scheduler"),
 	SET_RESET_PEAK("set outlet-peak-reset"),
 	SET_POWER_STATUS("set outlet-power"),
-	SET_TEMP_UNIT(" set temperature-unit")
+	SET_TEMP_UNIT("set temperature-unit"),
+	SET_DELETE_EVENT("set outlet-scheduler-delete")
 	;
 
 	public final String name;

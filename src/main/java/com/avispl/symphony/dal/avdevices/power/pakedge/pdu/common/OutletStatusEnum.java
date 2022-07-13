@@ -2,31 +2,32 @@
  * Copyright (c) 2022 AVI-SPL, Inc. All Rights Reserved.
  */
 
-package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
+package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common;
 
 /**
- * DeviceInfoMetric  class defined the enum for monitoring and controlling process
+ * OutletStatusEnum  class defined the enum for monitoring and controlling process
  *
  * @author Harry / Symphony Dev Team<br>
  * Created on 6/30/2022
  * @since 1.0.0
  */
-public enum DeviceInfoEmum {
+public enum OutletStatusEnum {
 
-	MODEL("Model"),
-	HOSTNAME("HostName"),
-	FIRMWARE_VERSION("FirmwareVersion"),
-	SERIAL_NUMBER("SerialNumber"),
-	MAC("MAC");
+	STATUS("OutletStatus"),
+	POWER("Power(W)"),
+	CURRENT("Current(A)"),
+	PEAK("Peak(A)"),
+	IS_ALERTS("Alerts"),
+	RESET_PEAK("ResetPeak");
 
 	public final String name;
 
 	/**
-	 * DeviceInfoMetric instantiation
+	 * OutletStatusEnum instantiation
 	 *
 	 * @param name {@code {@link #name}}
 	 */
-	DeviceInfoEmum(String name) {
+	OutletStatusEnum(String name) {
 		this.name = name;
 	}
 

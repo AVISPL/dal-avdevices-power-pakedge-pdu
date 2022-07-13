@@ -2,7 +2,7 @@
  * Copyright (c) 2022 AVI-SPL, Inc. All Rights Reserved.
  */
 
-package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.comon;
+package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common;
 
 import java.util.Objects;
 
@@ -38,7 +38,7 @@ public class PakedgePDUUtil {
 				return CommandMonitor.SHOW.getName() + CommandMonitor.PDU_STATUS.getName();
 			case NETWORK_INFORMATION:
 				return CommandMonitor.SHOW.getName() + CommandMonitor.NET.getName();
-			case TIME:
+			case START_TIME:
 				return CommandMonitor.SHOW.getName() + CommandMonitor.TIME.getName();
 			case ALTER_EMAIL:
 				return CommandMonitor.SHOW.getName() + CommandMonitor.ALERTS_EMAIL.getName();
