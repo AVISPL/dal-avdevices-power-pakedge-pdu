@@ -13,7 +13,7 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common;
  */
 public enum OutletScheduleEnum {
 
-	ID("EventID"),
+	EVENT_ID("EventID"),
 	TIME("Time"),
 	DAYS("Day0"),
 	ADD_DAY("AddDay"),

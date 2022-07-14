@@ -5,13 +5,13 @@
 package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common;
 
 /**
- * AlertMailEnum  class defined the enum for monitoring and controlling process
+ * AlertEmailEnum class defined the enum for monitoring and controlling process
  *
  * @author Harry / Symphony Dev Team<br>
  * Created on 6/30/2022
  * @since 1.0.0
  */
-public enum AlertMailEnum {
+public enum AlertEmailEnum {
 
 	RECIPIENT("Recipient"),
 	APPLY_CHANGE("ApplyChange"),
@@ -25,7 +25,7 @@ public enum AlertMailEnum {
 	 *
 	 * @param name {@code {@link #name}}
 	 */
-	AlertMailEnum(String name) {
+	AlertEmailEnum(String name) {
 		this.name = name;
 	}
 

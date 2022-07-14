@@ -138,7 +138,7 @@ public class EventDetails {
 		switch (metric) {
 			case ACTION:
 				return getAction();
-			case ID:
+			case EVENT_ID:
 				return getId();
 			case TIME:
 				return getTime();

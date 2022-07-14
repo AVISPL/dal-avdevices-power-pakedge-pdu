@@ -20,8 +20,7 @@ public enum ControllingMetric {
 	ALTER_OUTLET("AlertOutlet"),
 	ALTER_GLOBAL("AlertGlobal"),
 	ALTER_EMAIL("AlertEmail"),
-	CREATE_EVENT("CreateEvent")
-	;
+	CREATE_EVENT("CreateEvent");
 
 	public final String name;
 
@@ -49,6 +48,6 @@ public enum ControllingMetric {
 				return metric;
 			}
 		}
-		return null;
+		throw new IllegalStateException("The metric not supported: " + value);
 	}
 }
