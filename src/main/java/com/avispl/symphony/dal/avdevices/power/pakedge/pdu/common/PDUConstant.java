@@ -52,6 +52,7 @@ public class PDUConstant {
 	public static final String CANCEL_CHANGE = "CancelChange";
 	public static final String APPLY_CHANGE = "ApplyChange";
 	public static final String ERROR = "Error";
+	public static final String SUCCESS = "success";
 	public static final String REGEX_DATA = "\r\n";
 	public static final String PARAM_DASH_V = " -v ";
 	public static final String PARAM_DASH_O = " -o ";
@@ -83,6 +84,8 @@ public class PDUConstant {
 	public static final int ZERO = 0;
 	public static final int NUMBER_TWO = 2;
 	public static final int EVENT_DAYS_MAX = 6;
+	public static final int MAX_INDEX_DAY = 6;
+	public static final String ERROR_MESSAGE = "Can't retrieve %s: %s";
 	public static final String PARAM_ALERT_GLOBAL = " -a %s -b %s -c %s -d %s -e %s -f %s -l %s -h %s -t %s -p %s -q %s -r %s";
 	public static final String PARAM_ALERT_EMAIL = " -r %s -s %s";
 	public static final String PARAM_ALERT_OUTLET = " -o %s -a %s -v %s -c %s -d %s -e %s -f %s";

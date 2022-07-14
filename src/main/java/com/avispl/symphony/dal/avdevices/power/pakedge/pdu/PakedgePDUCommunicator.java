@@ -126,7 +126,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	/**
 	 * List of outletID
 	 */
-	private List<String> outletIdExtractedList;
+	private List<String> outletIdExtractedList = new ArrayList<>();
 
 	/**
 	 * List of Outlet Status
@@ -321,7 +321,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 			String[] propertySplit = property.split(PDUConstant.HASH);
 			String propertyName = propertySplit[0];
 			ControllingMetric metric = ControllingMetric.getMetricByValue(propertyName);
-			if (metric.getName().equals(ControllingMetric.CREATE_EVENT.getName())) {
+			if (ControllingMetric.CREATE_EVENT.getName().equals(metric.getName())) {
 				createNewSchedulerEvent(property, value);
 			} else {
 				isEmergencyDelivery = true;
@@ -399,7 +399,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 					break;
 				case CREATE_EVENT:
 					EventDetails eventDetails = convertOutletScheduleByValues(propertyName, stats, true);
-					populateSendCommandToControlMetric(eventDetails.getParamRequestOfEventDetails());
+					sendCommandToControlMetric(eventDetails.getParamRequestOfEventDetails());
 					isCreateSchedulerEvent = false;
 					isEmergencyDelivery = false;
 					break;
@@ -523,12 +523,12 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	 */
 	private void sendCommandToActionSchedulerEvent(EventDetails eventDetails) {
 		List<EventDetails> eventList = outletIdAndEventDetailsMap.get(Integer.valueOf(eventDetails.getOutletId()));
-		Optional<EventDetails> optional = eventList.stream().filter(event -> event.getId().equals(eventDetails.getId())).findFirst();
-		if (optional.isPresent() && !optional.get().getAction().equals(eventDetails.getAction())) {
+		Optional<EventDetails> details = eventList.stream().filter(event -> event.getId().equals(eventDetails.getId())).findFirst();
+		if (details.isPresent() && !details.get().getAction().equals(eventDetails.getAction())) {
 			String request = CommandControl.SET_DELETE_EVENT.getName() + PDUConstant.PARAM_DASH_O + eventDetails.getOutletId() + PDUConstant.PARAM_DASH_R + eventDetails.getAction();
-			populateSendCommandToControlMetric(request);
+			sendCommandToControlMetric(request);
 		} else {
-			populateSendCommandToControlMetric(eventDetails.getParamRequestOfEventDetails());
+			sendCommandToControlMetric(eventDetails.getParamRequestOfEventDetails());
 		}
 	}
 
@@ -554,15 +554,10 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	}
 
 	/**
-	 * Send Command to control the metric
+	 * Send command to control metric
 	 *
-	 * @param request the request is param to send command
-	 * @throws ResourceNotReachableException if control eventDetails error
+	 * @param request the request is request param of command
 	 */
-	private void populateSendCommandToControlMetric(String request) {
-		sendCommandToControlMetric(request);
-	}
-
 	private void sendCommandToControlMetric(String request) {
 		try {
 			String response = send(request);
@@ -594,8 +589,9 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 			outletID = stats.get(groupKey + CreateEventEnum.OUTLET_ID.getName());
 			mapOfDayAndEvent = eventIdAndDayMap;
 		} else {
-			int len = propertyName.length() - PDUConstant.EVENTS.length();
-			outletID = propertyName.substring(len - 1, len);
+			//Example name OutletScheduler1Event get 1 in name
+			int indexOutlet = propertyName.length() - PDUConstant.EVENTS.length();
+			outletID = propertyName.substring(indexOutlet - 1, indexOutlet);
 			mapOfDayAndEvent = outletIdEventIdAndDayMap.get(outletID);
 		}
 
@@ -715,7 +711,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				break;
 			case APPLY_CHANGE:
 				OutletAutoPing outletAutoPing = convertOutletAutoPingByValues(propertyName, stats);
-				populateSendCommandToControlMetric(outletAutoPing.getParamRequestOfOutletAutoPing());
+				sendCommandToControlMetric(outletAutoPing.getParamRequestOfOutletAutoPing());
 				isEmergencyDelivery = false;
 				break;
 			case CANCEL:
@@ -790,7 +786,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 					break;
 				case APPLY_CHANGE:
 					OutletConfig outletConfig = convertOutletConfigByValues(propertyName, stats);
-					populateSendCommandToControlMetric(outletConfig.getParamRequestOfOutletConfig());
+					sendCommandToControlMetric(outletConfig.getParamRequestOfOutletConfig());
 					sendCommandToControlPowerStatus(outletConfig);
 					isEmergencyDelivery = false;
 					break;
@@ -896,7 +892,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				break;
 			case APPLY_CHANGE:
 				AlertOutlet alertOutlet = convertAlertOutletByValues(propertyName, stats);
-				populateSendCommandToControlMetric(alertOutlet.getParamRequestOfAlertOutlet());
+				sendCommandToControlMetric(alertOutlet.getParamRequestOfAlertOutlet());
 				isEmergencyDelivery = false;
 				break;
 			case CANCEL:
@@ -986,7 +982,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				break;
 			case APPLY_CHANGE:
 				AlertGlobal alertGlobalDTO = convertAlertGlobalByValues(propertyName, stats);
-				populateSendCommandToControlMetric(alertGlobalDTO.getParamRequestOfAlertGlobal());
+				sendCommandToControlMetric(alertGlobalDTO.getParamRequestOfAlertGlobal());
 				isEmergencyDelivery = false;
 				break;
 			case CANCEL:
@@ -1062,7 +1058,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				break;
 			case APPLY_CHANGE:
 				AlertEMail alertMail = convertAlertEmailValues(propertyName, stats);
-				populateSendCommandToControlMetric(alertMail.getParamRequestOfAlertMail());
+				sendCommandToControlMetric(alertMail.getParamRequestOfAlertMail());
 				isEmergencyDelivery = false;
 				break;
 			default:
@@ -1080,9 +1076,8 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	 */
 	private AlertEMail convertAlertEmailValues(String propertyName, Map<String, String> stats) {
 		AlertEMail alertMail = new AlertEMail();
-		String keyGroup = propertyName + PDUConstant.HASH;
-		String recipient = stats.get(keyGroup + AlertEmailEnum.RECIPIENT.getName());
-		String subject = stats.get(keyGroup + AlertEmailEnum.SUBJECT.getName());
+		String recipient = stats.get(propertyName + PDUConstant.HASH + AlertEmailEnum.RECIPIENT.getName());
+		String subject = stats.get(propertyName + PDUConstant.HASH + AlertEmailEnum.SUBJECT.getName());
 		alertMail.setRecipient(recipient);
 		alertMail.setSubject(subject);
 
@@ -1114,7 +1109,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				break;
 			case APPLY_CHANGE:
 				PDUDisplay pduDisplayData = convertDPUDisplayByValues(propertyName, stats);
-				populateSendCommandToControlMetric(pduDisplayData.getParamRequestOfPDUDisplay());
+				sendCommandToControlMetric(pduDisplayData.getParamRequestOfPDUDisplay());
 				sendCommandToControlTemperatureUnit(pduDisplayData);
 				isEmergencyDelivery = false;
 				break;
@@ -1149,11 +1144,10 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	 */
 	private PDUDisplay convertDPUDisplayByValues(String propertyName, Map<String, String> stats) {
 		PDUDisplay pduDisplayData = new PDUDisplay();
-		String keyGroup = propertyName + PDUConstant.HASH;
-		String led = stats.get(keyGroup + PDUDisplayEnum.LED.getName());
-		String oledContrast = stats.get(keyGroup + PDUDisplayEnum.OLED_CONTRAST.getName());
-		String oledEnable = stats.get(keyGroup + PDUDisplayEnum.OLED_ENABLE.getName());
-		String tempUnit = stats.get(keyGroup + PDUDisplayEnum.TEMPERATURE_UNIT.getName());
+		String led = stats.get(propertyName + PDUConstant.HASH + PDUDisplayEnum.LED.getName());
+		String oledContrast = stats.get(propertyName + PDUConstant.HASH + PDUDisplayEnum.OLED_CONTRAST.getName());
+		String oledEnable = stats.get(propertyName + PDUConstant.HASH + PDUDisplayEnum.OLED_ENABLE.getName());
+		String tempUnit = stats.get(propertyName + PDUConstant.HASH + PDUDisplayEnum.TEMPERATURE_UNIT.getName());
 
 		String tempUnitValue = PDUConstant.TEMPERATURE_C;
 		if (String.valueOf(PDUConstant.NUMBER_ONE).equalsIgnoreCase(tempUnit)) {
@@ -1212,15 +1206,15 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 			noOfMonitoringMetric = MonitoringMetric.values().length;
 		}
 		if (failedMonitor.size() == noOfMonitoringMetric) {
-			StringBuilder stringBuilder = new StringBuilder();
+			StringBuilder errorMessage = new StringBuilder();
 			for (Map.Entry<String, String> messageFailed : failedMonitor.entrySet()) {
 				String value = messageFailed.getValue();
-				if (!stringBuilder.toString().contains(value)) {
-					stringBuilder.append(value + PDUConstant.SPACE);
+				if (!errorMessage.toString().contains(value)) {
+					errorMessage.append(value + PDUConstant.SPACE);
 				}
 			}
 			failedMonitor.clear();
-			throw new ResourceNotReachableException("Get monitoring data failed: " + stringBuilder);
+			throw new ResourceNotReachableException("Get monitoring data failed: " + errorMessage);
 		}
 		for (MonitoringMetric metric : MonitoringMetric.values()) {
 			populateControl(metric, stats, advancedControllableProperties);
@@ -1340,6 +1334,9 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 		try {
 			String responseData = send(request);
 			String result = responseData.substring(request.length() + PDUConstant.NUMBER_TWO, responseData.lastIndexOf(PDUConstant.REGEX_DATA));
+			if (responseData == null || result == null || !result.contains(PDUConstant.SUCCESS)) {
+				failedMonitor.put(metric.getName(), String.format(PDUConstant.ERROR_MESSAGE, metric.getName(), responseData));
+			}
 			retrieveDataDetails(result, metric);
 		} catch (Exception e) {
 			failedMonitor.put(metric.getName(), e.getMessage());
@@ -1401,7 +1398,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 						for (EventDetails event : eventDetailsList) {
 							Map<String, String> dayIndexAndValue = new HashMap<>();
 							//init map with index to 0-6
-							for (int i = 0; i <= 6; i++) {
+							for (int i = 0; i <= PDUConstant.MAX_INDEX_DAY; i++) {
 								dayIndexAndValue.put(PDUConstant.DAY + i, null);
 							}
 							int i = 0;
@@ -1452,7 +1449,8 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 			DeviceInfoWrapper deviceInfoWrapper = mapper.readValue(responseData.substring(request.length() + PDUConstant.NUMBER_TWO, responseData.lastIndexOf(PDUConstant.REGEX_DATA)),
 					DeviceInfoWrapper.class);
 
-			if (deviceInfoWrapper == null || deviceInfoWrapper.getStatus().equalsIgnoreCase(PDUConstant.ERROR)) {
+			if (responseData == null || deviceInfoWrapper == null || deviceInfoWrapper.getStatus().equalsIgnoreCase(PDUConstant.ERROR)) {
+				failedMonitor.put(metric.getName(), String.format(PDUConstant.ERROR_MESSAGE, metric.getName(), responseData));
 				contributeNoneValueForDeviceInfo(stats);
 			} else {
 				DeviceInfoResponse deviceInfoWrapperResponse = deviceInfoWrapper.getResponse();
@@ -1490,7 +1488,12 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 		try {
 			String responseData = send(request);
 			TimeZoneWrapper timeZoneWrapper = mapper.readValue(responseData.substring(request.length() + PDUConstant.NUMBER_TWO, responseData.lastIndexOf(PDUConstant.REGEX_DATA)), TimeZoneWrapper.class);
-			stats.put(MonitoringMetric.TIMEZONE.getName(), timeZoneWrapper.getResponse().getTimezone());
+			if (responseData == null || timeZoneWrapper == null || PDUConstant.ERROR.equals(timeZoneWrapper.getStatus())) {
+				failedMonitor.put(metric.getName(), String.format(PDUConstant.ERROR_MESSAGE, metric.getName(), responseData));
+				stats.put(MonitoringMetric.TIMEZONE.getName(), PDUConstant.NONE);
+			} else {
+				stats.put(MonitoringMetric.TIMEZONE.getName(), timeZoneWrapper.getResponse().getTimezone());
+			}
 		} catch (Exception e) {
 			stats.put(MonitoringMetric.TIMEZONE.getName(), PDUConstant.NONE);
 			failedMonitor.put(metric.getName(), e.getMessage());
@@ -1509,8 +1512,13 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 			String responseData = send(request);
 			DateAndTimeWrapper dateAndTimeWrapper = mapper.readValue(responseData.substring(request.length() + PDUConstant.NUMBER_TWO, responseData.lastIndexOf(PDUConstant.REGEX_DATA)),
 					DateAndTimeWrapper.class);
-			stats.put(PDUConstant.TIME, dateAndTimeWrapper.getResponse().getTime());
-			stats.put(PDUConstant.DATE, dateAndTimeWrapper.getResponse().getDate());
+			if (dateAndTimeWrapper == null || PDUConstant.ERROR.equals(dateAndTimeWrapper.getStatus())) {
+				failedMonitor.put(metric.getName(), String.format(PDUConstant.ERROR_MESSAGE, metric.getName(), responseData));
+				stats.put(PDUConstant.DATE, PDUConstant.NONE);
+			} else {
+				stats.put(PDUConstant.TIME, dateAndTimeWrapper.getResponse().getTime());
+				stats.put(PDUConstant.DATE, dateAndTimeWrapper.getResponse().getDate());
+			}
 		} catch (Exception e) {
 			stats.put(PDUConstant.TIME, PDUConstant.NONE);
 			stats.put(PDUConstant.DATE, PDUConstant.NONE);
@@ -1529,7 +1537,11 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 		try {
 			String responseData = send(request);
 			UptimeWrapper uptimeWrapper = mapper.readValue(responseData.substring(request.length() + PDUConstant.NUMBER_TWO, responseData.lastIndexOf(PDUConstant.REGEX_DATA)), UptimeWrapper.class);
-			stats.put(MonitoringMetric.UPTIME.getName(), formatTimeData(uptimeWrapper.getResponse().getUptime()));
+			if (uptimeWrapper == null || PDUConstant.ERROR.equals(uptimeWrapper.getStatus())) {
+				failedMonitor.put(metric.getName(), String.format(PDUConstant.ERROR_MESSAGE, metric.getName(), responseData));
+			} else {
+				stats.put(MonitoringMetric.UPTIME.getName(), formatTimeData(uptimeWrapper.getResponse().getUptime()));
+			}
 		} catch (Exception e) {
 			stats.put(MonitoringMetric.UPTIME.getName(), PDUConstant.NONE);
 			failedMonitor.put(metric.getName(), e.getMessage());
@@ -1848,9 +1860,13 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 		try {
 			String responseData = send(request);
 			NetWorkWrapper pduStatusWrapper = mapper.readValue(responseData.substring(request.length() + PDUConstant.NUMBER_TWO, responseData.lastIndexOf(PDUConstant.REGEX_DATA)), NetWorkWrapper.class);
-			for (NetworkInfoEnum networkInfoEnum : NetworkInfoEnum.values()) {
-				String value = convertValueByIndexOfSpace(pduStatusWrapper.getResponse().getValueByMetric(networkInfoEnum));
-				stats.put(networkInfoEnum.getName(), value);
+			if (pduStatusWrapper == null || PDUConstant.ERROR.equals(pduStatusWrapper.getStatus())) {
+				failedMonitor.put(metric.getName(), String.format(PDUConstant.ERROR_MESSAGE, metric.getName(), responseData));
+			} else {
+				for (NetworkInfoEnum networkInfoEnum : NetworkInfoEnum.values()) {
+					String value = convertValueByIndexOfSpace(pduStatusWrapper.getResponse().getValueByMetric(networkInfoEnum));
+					stats.put(networkInfoEnum.getName(), value);
+				}
 			}
 		} catch (Exception e) {
 			failedMonitor.put(metric.getName(), e.getMessage());
@@ -2012,10 +2028,8 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	 * @return String (none/value)
 	 */
 	private String getDefaultValueForNoneData(String value) {
-		if (StringUtils.isNullOrEmpty(value)) {
-			value = PDUConstant.NONE;
-		}
-		return value;
+
+		return StringUtils.isNullOrEmpty(value) ? PDUConstant.NONE : value;
 	}
 
 	/**
@@ -2152,8 +2166,11 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	 * @return AdvancedControllableProperty switch instance
 	 */
 	private AdvancedControllableProperty controlSwitch(Map<String, String> stats, String name, String value, String labelOff, String labelOn) {
+		if (StringUtils.isNullOrEmpty(value)) {
+			value = PDUConstant.NONE;
+		}
 		stats.put(name, value);
-		if (!PDUConstant.NONE.equals(value)) {
+		if (!PDUConstant.NONE.equals(value) && !StringUtils.isNullOrEmpty(value)) {
 			return createSwitch(name, Integer.parseInt(value), labelOff, labelOn);
 		}
 		// if response data is null or none. Only display monitoring data not display controlling data

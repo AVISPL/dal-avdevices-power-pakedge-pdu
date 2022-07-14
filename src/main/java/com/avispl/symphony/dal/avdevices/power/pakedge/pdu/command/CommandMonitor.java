@@ -13,21 +13,20 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command;
  */
 public enum CommandMonitor {
 
-	SHOW("show "),
-	DEVICE_INFO("device-info"),
-	UPTIME("uptime"),
-	TIME("time"),
-	TIME_ZONE("timezone"),
-	NET("net"),
-	PDU_STATUS("pdu-status"),
-	OUTLET_STATUS("outlet-status -o "),
-	ALERTS_EMAIL("alerts-email"),
-	PDU_DISPLAY("pdu-display"),
-	OUTLET_CONF("outlet-conf -o "),
-	ALTER_GLOBAL("alerts-global"),
-	ALTER_OUTLET("alerts-outlet -o "),
-	OUTLET_AUTO_PING("outlet-auto-ping -o "),
-	OUTLET_SCHEDULER_EVENT("outlet-scheduler -o ");
+	DEVICE_INFO("show device-info"),
+	UPTIME("show uptime"),
+	TIME("show time"),
+	TIME_ZONE("show timezone"),
+	NET("show net"),
+	PDU_STATUS("show pdu-status"),
+	OUTLET_STATUS("show outlet-status -o "),
+	ALERTS_EMAIL("show alerts-email"),
+	PDU_DISPLAY("show pdu-display"),
+	OUTLET_CONF("show outlet-conf -o "),
+	ALTER_GLOBAL("show alerts-global"),
+	ALTER_OUTLET("show alerts-outlet -o "),
+	OUTLET_AUTO_PING("show outlet-auto-ping -o "),
+	OUTLET_SCHEDULER_EVENT("show outlet-scheduler -o ");
 
 	public final String name;
 

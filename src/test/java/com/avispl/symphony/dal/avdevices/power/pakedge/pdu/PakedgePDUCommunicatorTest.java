@@ -25,6 +25,7 @@ class PakedgePDUCommunicatorTest {
 		pakedgePDUCommunicator.setPort(23);
 		pakedgePDUCommunicator.setLogin("su");
 		pakedgePDUCommunicator.setPassword("12345");
+		pakedgePDUCommunicator.setTimeout(2000);
 		pakedgePDUCommunicator.init();
 		pakedgePDUCommunicator.connect();
 	}
