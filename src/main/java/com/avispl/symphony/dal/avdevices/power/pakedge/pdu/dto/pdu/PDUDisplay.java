@@ -22,7 +22,9 @@ import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUDisplayEnum
 public class PDUDisplay {
 
 	private String led;
-	private String temp_unit;
+
+	@JsonAlias("temp_unit")
+	private String tempUnit;
 
 	@JsonAlias("oled_enabled")
 	private String oledEnabled;
@@ -85,21 +87,21 @@ public class PDUDisplay {
 	}
 
 	/**
-	 * Retrieves {@code {@link #temp_unit}}
+	 * Retrieves {@code {@link #tempUnit }}
 	 *
-	 * @return value of {@link #temp_unit}
+	 * @return value of {@link #tempUnit}
 	 */
-	public String getTemp_unit() {
-		return temp_unit;
+	public String getTempUnit() {
+		return tempUnit;
 	}
 
 	/**
 	 * Sets {@code temp_unit}
 	 *
-	 * @param temp_unit the {@code java.lang.String} field
+	 * @param tempUnit the {@code java.lang.String} field
 	 */
-	public void setTemp_unit(String temp_unit) {
-		this.temp_unit = temp_unit;
+	public void setTempUnit(String tempUnit) {
+		this.tempUnit = tempUnit;
 	}
 
 	/***

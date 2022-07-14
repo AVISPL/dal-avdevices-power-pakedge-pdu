@@ -272,10 +272,28 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 		return Collections.singletonList(localExtendedStatistics);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void internalInit() throws Exception {
 		super.internalInit();
 		this.createChannel();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected void internalDestroy() {
+		isEmergencyDelivery = false;
+		isCreateSchedulerEvent = false;
+		if (localExtendedStatistics != null && localExtendedStatistics.getStatistics() != null && localExtendedStatistics.getControllableProperties() != null) {
+			localExtendedStatistics.getStatistics().clear();
+			localExtendedStatistics.getControllableProperties().clear();
+		}
+		outletIdExtractedList.clear();
+		super.internalDestroy();
 	}
 
 	/**
@@ -877,7 +895,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				addOrUpdateAdvanceControlProperties(advancedControllableProperties, powerControllableProperty);
 				break;
 			case APPLY_CHANGE:
-				AlertOutlet alertOutlet = convertAlertOutletlByValues(propertyName, stats);
+				AlertOutlet alertOutlet = convertAlertOutletByValues(propertyName, stats);
 				populateSendCommandToControlMetric(alertOutlet.getParamRequestOfAlertOutlet());
 				isEmergencyDelivery = false;
 				break;
@@ -897,7 +915,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	 * @param stats the stats are list of stats
 	 * @return propertyName is name of AlertOutlet
 	 */
-	private AlertOutlet convertAlertOutletlByValues(String propertyName, Map<String, String> stats) {
+	private AlertOutlet convertAlertOutletByValues(String propertyName, Map<String, String> stats) {
 		AlertOutlet alertOutlet = new AlertOutlet();
 		String groupKey = propertyName + PDUConstant.HASH;
 		String currentAlert = stats.get(groupKey + AlertOutletEnum.CURRENT_ALERT.getName());
@@ -1114,7 +1132,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	 * @throws ResourceNotReachableException if control TemperatureUnit error
 	 */
 	private void sendCommandToControlTemperatureUnit(PDUDisplay pdu) {
-		String tempUnitCurrent = pdu.getTemp_unit();
+		String tempUnitCurrent = pdu.getTempUnit();
 		String tempUnit = pduStatus.getPduTempUnit();
 		if (!tempUnitCurrent.equalsIgnoreCase(tempUnit)) {
 			//set temperature-unit -u <unit>
@@ -1141,7 +1159,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 		if (String.valueOf(PDUConstant.NUMBER_ONE).equalsIgnoreCase(tempUnit)) {
 			tempUnitValue = PDUConstant.TEMPERATURE_F;
 		}
-		pduDisplayData.setTemp_unit(tempUnitValue);
+		pduDisplayData.setTempUnit(tempUnitValue);
 		pduDisplayData.setLed(led);
 		pduDisplayData.setOledContrast(oledContrast);
 		pduDisplayData.setOledEnabled(oledEnable);
@@ -1171,6 +1189,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 		outletIdAndEventDetailsMap.clear();
 		outletConfigList.clear();
 		alertOutletList.clear();
+		outletIdExtractedList.clear();
 	}
 
 	/**
