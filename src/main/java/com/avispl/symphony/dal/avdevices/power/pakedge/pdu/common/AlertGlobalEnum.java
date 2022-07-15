@@ -28,7 +28,7 @@ public enum AlertGlobalEnum {
 	VOLTAGE_MAX("VoltageMax"),
 	VOLTAGE_MIN("VoltageMin"),
 	CANCEL("CancelChange"),
-	APPLY_CHANGE("ApplyChange")	;
+	APPLY_CHANGE("ApplyChange");
 
 	public final String name;
 

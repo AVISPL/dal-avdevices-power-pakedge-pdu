@@ -57,7 +57,7 @@ public class PakedgePDUUtil {
 			case OUTLET_SCHEDULER_EVENT:
 				return CommandMonitor.OUTLET_SCHEDULER_EVENT.getName();
 			default:
-				throw new IllegalArgumentException("Unsupported monitor command: "+  monitoringMetric.name());
+				throw new IllegalArgumentException("Unsupported monitor command: " + monitoringMetric.name());
 		}
 	}
 

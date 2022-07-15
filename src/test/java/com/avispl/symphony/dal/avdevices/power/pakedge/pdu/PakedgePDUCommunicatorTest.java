@@ -703,63 +703,63 @@ class PakedgePDUCommunicatorTest {
 	@Test
 	@Tag("RealDevice")
 	void testControlCreateNewSchedulerEvent() throws Exception {
-			ExtendedStatistics extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
-			Map<String, String> stats = extendedStatistics.getStatistics();
-			Assertions.assertEquals("False", stats.get("CreateEvent#Edited"));
+		ExtendedStatistics extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
+		Map<String, String> stats = extendedStatistics.getStatistics();
+		Assertions.assertEquals("False", stats.get("CreateEvent#Edited"));
 
-			ControllableProperty controllableProperty = new ControllableProperty();
-			String propName = "CreateEvent#Action";
-			String propValue = "TurnOff";
-			controllableProperty.setProperty(propName);
-			controllableProperty.setValue(propValue);
-			pakedgePDUCommunicator.controlProperty(controllableProperty);
-			extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
-			stats = extendedStatistics.getStatistics();
-			Assertions.assertEquals(propValue, stats.get(propName));
+		ControllableProperty controllableProperty = new ControllableProperty();
+		String propName = "CreateEvent#Action";
+		String propValue = "TurnOff";
+		controllableProperty.setProperty(propName);
+		controllableProperty.setValue(propValue);
+		pakedgePDUCommunicator.controlProperty(controllableProperty);
+		extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
+		stats = extendedStatistics.getStatistics();
+		Assertions.assertEquals(propValue, stats.get(propName));
 
-			propName = "CreateEvent#Day0";
-			propValue = "Tue";
-			controllableProperty.setProperty(propName);
-			controllableProperty.setValue(propValue);
-			pakedgePDUCommunicator.controlProperty(controllableProperty);
-			extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
-			stats = extendedStatistics.getStatistics();
-			Assertions.assertEquals(propValue, stats.get(propName));
+		propName = "CreateEvent#Day0";
+		propValue = "Tue";
+		controllableProperty.setProperty(propName);
+		controllableProperty.setValue(propValue);
+		pakedgePDUCommunicator.controlProperty(controllableProperty);
+		extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
+		stats = extendedStatistics.getStatistics();
+		Assertions.assertEquals(propValue, stats.get(propName));
 
-			propName = "CreateEvent#OutletID";
-			propValue = "2";
-			controllableProperty.setProperty(propName);
-			controllableProperty.setValue(propValue);
-			pakedgePDUCommunicator.controlProperty(controllableProperty);
-			extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
-			stats = extendedStatistics.getStatistics();
-			Assertions.assertEquals(propValue, stats.get(propName));
+		propName = "CreateEvent#OutletID";
+		propValue = "2";
+		controllableProperty.setProperty(propName);
+		controllableProperty.setValue(propValue);
+		pakedgePDUCommunicator.controlProperty(controllableProperty);
+		extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
+		stats = extendedStatistics.getStatistics();
+		Assertions.assertEquals(propValue, stats.get(propName));
 
-			propName = "CreateEvent#StartTime";
-			propValue = "01:00";
-			controllableProperty.setProperty(propName);
-			controllableProperty.setValue(propValue);
-			pakedgePDUCommunicator.controlProperty(controllableProperty);
-			extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
-			stats = extendedStatistics.getStatistics();
-			Assertions.assertEquals(propValue, stats.get(propName));
+		propName = "CreateEvent#StartTime";
+		propValue = "01:00";
+		controllableProperty.setProperty(propName);
+		controllableProperty.setValue(propValue);
+		pakedgePDUCommunicator.controlProperty(controllableProperty);
+		extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
+		stats = extendedStatistics.getStatistics();
+		Assertions.assertEquals(propValue, stats.get(propName));
 
-			propName = "CreateEvent#AddDay";
-			propValue = "1";
-			controllableProperty.setProperty(propName);
-			controllableProperty.setValue(propValue);
-			pakedgePDUCommunicator.controlProperty(controllableProperty);
-			extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
-			stats = extendedStatistics.getStatistics();
-			Assertions.assertEquals("Mon", stats.get("CreateEvent#Day1"));
+		propName = "CreateEvent#AddDay";
+		propValue = "1";
+		controllableProperty.setProperty(propName);
+		controllableProperty.setValue(propValue);
+		pakedgePDUCommunicator.controlProperty(controllableProperty);
+		extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
+		stats = extendedStatistics.getStatistics();
+		Assertions.assertEquals("Mon", stats.get("CreateEvent#Day1"));
 
-			propName = "CreateEvent#CreateEvent";
-			propValue = "1";
-			controllableProperty.setProperty(propName);
-			controllableProperty.setValue(propValue);
-			pakedgePDUCommunicator.controlProperty(controllableProperty);
-			extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
-			stats = extendedStatistics.getStatistics();
-			Assertions.assertEquals("False", stats.get("CreateEvent#Edited"));
-		}
+		propName = "CreateEvent#CreateEvent";
+		propValue = "1";
+		controllableProperty.setProperty(propName);
+		controllableProperty.setValue(propValue);
+		pakedgePDUCommunicator.controlProperty(controllableProperty);
+		extendedStatistics = (ExtendedStatistics) pakedgePDUCommunicator.getMultipleStatistics().get(0);
+		stats = extendedStatistics.getStatistics();
+		Assertions.assertEquals("False", stats.get("CreateEvent#Edited"));
+	}
 }
