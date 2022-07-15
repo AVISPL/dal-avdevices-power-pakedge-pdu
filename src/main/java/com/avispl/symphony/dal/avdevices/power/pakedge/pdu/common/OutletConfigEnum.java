@@ -14,6 +14,7 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common;
 public enum OutletConfigEnum {
 
 	OUTLET_STATUS("OutletStatus"),
+	RESET_PEAK("ResetPeakAction"),
 	NAME("OutletName"),
 	LOCAL_REBOOT("LocalRebootState"),
 	POWER_ON_DELAY("PowerOnDelay"),

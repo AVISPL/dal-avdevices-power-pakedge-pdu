@@ -17,8 +17,7 @@ public enum OutletStatusEnum {
 	POWER("Power(W)"),
 	CURRENT("Current(A)"),
 	PEAK("Peak(A)"),
-	IS_ALERTS("Alerts"),
-	RESET_PEAK("ResetPeak");
+	IS_ALERTS("Alerts");
 
 	public final String name;
 

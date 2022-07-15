@@ -549,7 +549,7 @@ class PakedgePDUCommunicatorTest {
 		stats = extendedStatistics.getStatistics();
 		Assertions.assertEquals(propValue, stats.get(propName));
 
-		propName = "OutletConfig1#ResetPeak";
+		propName = "OutletConfig1#ResetPeakAction";
 		propValue = "";
 		controllableProperty.setProperty(propName);
 		controllableProperty.setValue(propValue);
