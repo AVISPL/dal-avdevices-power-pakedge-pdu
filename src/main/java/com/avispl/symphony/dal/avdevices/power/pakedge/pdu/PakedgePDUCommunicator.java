@@ -28,7 +28,6 @@ import com.avispl.symphony.api.dal.dto.monitor.ExtendedStatistics;
 import com.avispl.symphony.api.dal.dto.monitor.Statistics;
 import com.avispl.symphony.api.dal.error.ResourceNotReachableException;
 import com.avispl.symphony.api.dal.monitor.Monitorable;
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.AlertEmailEnum;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.AlertGlobalEnum;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.AlertOutletEnum;
@@ -524,9 +523,9 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	 */
 	private void sendCommandToActionSchedulerEvent(EventDetails eventDetails) {
 		List<EventDetails> eventList = outletIdAndEventDetailsMap.get(Integer.valueOf(eventDetails.getOutletId()));
-		Optional<EventDetails> details = eventList.stream().filter(event -> event.getId().equals(eventDetails.getId())).findFirst();
-		if (details.isPresent() && !details.get().getAction().equals(eventDetails.getAction())) {
-			String request = CommandControl.SET_DELETE_EVENT.getName() + PDUConstant.PARAM_DASH_O + eventDetails.getOutletId() + PDUConstant.PARAM_DASH_R + eventDetails.getAction();
+		Optional<EventDetails> eventItemDetails = eventList.stream().filter(event -> event.getId().equals(eventDetails.getId())).findFirst();
+		if (eventItemDetails.isPresent() && !eventItemDetails.get().getAction().equals(eventDetails.getAction())) {
+			String request = PakedgePDUUtil.getControlCommand(ControllingMetric.DELETE_EVENT) + PDUConstant.PARAM_DASH_O + eventDetails.getOutletId() + PDUConstant.PARAM_DASH_R + eventDetails.getAction();
 			sendCommandToControlMetric(request);
 		} else {
 			sendCommandToControlMetric(eventDetails.getParamRequestOfEventDetails());
@@ -562,13 +561,16 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	private void sendCommandToControlMetric(String request) {
 		try {
 			String response = send(request);
+			if (StringUtils.isNullOrEmpty(response)) {
+				throw new ResourceNotReachableException("Send command is failed the response data is empty");
+			}
 			response = response.substring(request.length() + PDUConstant.NUMBER_TWO, response.lastIndexOf(PDUConstant.REGEX_DATA));
 			ResponseControlDataWrapper responseControlDataWrapper = mapper.readValue(response, ResponseControlDataWrapper.class);
 			if (PDUConstant.ERROR.equalsIgnoreCase(responseControlDataWrapper.getStatus())) {
 				throw new ResourceNotReachableException(responseControlDataWrapper.getMsg());
 			}
 		} catch (Exception e) {
-			throw new ResourceNotReachableException(String.format("Error while controlling %s", e.getMessage()), e);
+			throw new ResourceNotReachableException(String.format("Error while controlling %s", e.getMessage()));
 		}
 	}
 
@@ -812,7 +814,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 		if (!outletConfig.getStatus().equalsIgnoreCase(status)) {
 
 			// set outlet-power -o <outletNo> -v <value>
-			String request = CommandControl.SET_POWER_STATUS.getName() + PDUConstant.PARAM_DASH_O + outletConfig.getId() + PDUConstant.PARAM_DASH_V + outletConfig.getStatus();
+			String request = PakedgePDUUtil.getControlCommand(ControllingMetric.POWER_STATUS) + PDUConstant.PARAM_DASH_O + outletConfig.getId() + PDUConstant.PARAM_DASH_V + outletConfig.getStatus();
 			sendCommandToControlMetric(request);
 		}
 	}
@@ -825,7 +827,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 	 */
 	private void sendCommandToControlResetPeak(String outletID) {
 		//set outlet-peak-reset -o <outletNo>
-		String request = CommandControl.SET_RESET_PEAK.getName() + PDUConstant.PARAM_DASH_O + outletID;
+		String request = PakedgePDUUtil.getControlCommand(ControllingMetric.RESET_PEAK) + PDUConstant.PARAM_DASH_O + outletID;
 		sendCommandToControlMetric(request);
 	}
 
@@ -1131,7 +1133,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 		String tempUnit = pduStatus.getPduTempUnit();
 		if (!tempUnitCurrent.equalsIgnoreCase(tempUnit)) {
 			//set temperature-unit -u <unit>
-			String request = CommandControl.SET_TEMP_UNIT.getName() + PDUConstant.PARAM_DASH_U + tempUnitCurrent;
+			String request = PakedgePDUUtil.getControlCommand(ControllingMetric.TEMP_UNIT) + PDUConstant.PARAM_DASH_U + tempUnitCurrent;
 			sendCommandToControlMetric(request);
 		}
 	}
@@ -1212,6 +1214,13 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				if (!errorMessage.toString().contains(value)) {
 					errorMessage.append(value + PDUConstant.SPACE);
 				}
+			}
+			if (errorMessage.toString().contains(PDUConstant.CONNECTION_REFUSED)) {
+				errorMessage = new StringBuilder(PDUConstant.CONNECTION_REFUSED_MESSAGE);
+			} else if (errorMessage.toString().contains(PDUConstant.CONNECTION_TIMEOUT)) {
+				errorMessage = new StringBuilder(PDUConstant.CONNECTION_TIMEOUT_MESSAGE);
+			} else {
+				errorMessage = new StringBuilder("All metric for retrieving monitoring data are error");
 			}
 			failedMonitor.clear();
 			throw new ResourceNotReachableException("Get monitoring data failed: " + errorMessage);

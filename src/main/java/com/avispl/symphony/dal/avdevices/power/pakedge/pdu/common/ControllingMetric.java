@@ -20,6 +20,10 @@ public enum ControllingMetric {
 	ALTER_OUTLET("AlertOutlet"),
 	ALTER_GLOBAL("AlertGlobal"),
 	ALTER_EMAIL("AlertEmail"),
+	RESET_PEAK("ResetPeakAction"),
+	POWER_STATUS("OutletStatus"),
+	TEMP_UNIT("TemperatureUnit"),
+	DELETE_EVENT("DeleteEvent"),
 	CREATE_EVENT("CreateEvent");
 
 	public final String name;

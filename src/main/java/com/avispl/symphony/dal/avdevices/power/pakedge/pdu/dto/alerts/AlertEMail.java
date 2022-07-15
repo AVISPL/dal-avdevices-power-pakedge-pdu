@@ -4,8 +4,10 @@
 
 package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.alerts;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.ControllingMetric;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PakedgePDUUtil;
+import com.avispl.symphony.dal.util.StringUtils;
 
 /**
  * AlertMail class provides during the monitoring and controlling process
@@ -62,6 +64,12 @@ public class AlertEMail {
 	 */
 	public String getParamRequestOfAlertMail() {
 		//command control set alerts-email -r <recipient> -s <subject>
-		return CommandControl.SET_ALERT_EMAIL.getName() + String.format(PDUConstant.PARAM_ALERT_EMAIL, recipient, subject);
+		if (StringUtils.isNullOrEmpty(recipient)) {
+			recipient = PDUConstant.QUOTATION_MARKS;
+		}
+		if (StringUtils.isNullOrEmpty(subject)) {
+			subject = PDUConstant.QUOTATION_MARKS;
+		}
+		return PakedgePDUUtil.getControlCommand(ControllingMetric.ALTER_EMAIL) + String.format(PDUConstant.PARAM_ALERT_EMAIL, recipient, subject);
 	}
 }

@@ -4,9 +4,11 @@
 
 package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.events;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.ControllingMetric;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.OutletScheduleEnum;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PakedgePDUUtil;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dropdownlist.EnumTypeHandler;
 import com.avispl.symphony.dal.util.StringUtils;
 
 /**
@@ -125,7 +127,11 @@ public class EventDetails {
 		if (StringUtils.isNullOrEmpty(id)) {
 			eventId = PDUConstant.EMPTY_STRING;
 		}
-		return CommandControl.SET_OUTLET_SCHEDULER.getName() + String.format(PDUConstant.PARAM_OUTLET_EVENT, outletId, eventId, time, days, action);
+		String day = EnumTypeHandler.getValueByStringArray(days);
+		if (StringUtils.isNullOrEmpty(day)) {
+			day = PDUConstant.QUOTATION_MARKS;
+		}
+		return PakedgePDUUtil.getControlCommand(ControllingMetric.OUTLET_SCHEDULER_EVENT) + String.format(PDUConstant.PARAM_OUTLET_EVENT, outletId, eventId, time, day, action);
 	}
 
 	/**

@@ -7,9 +7,10 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.outlets;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.ControllingMetric;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.OutletConfigEnum;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PakedgePDUUtil;
 
 /**
  * OutletConfig class provides during the monitoring and controlling process
@@ -150,7 +151,7 @@ public class OutletConfig {
 	 */
 	public String getParamRequestOfOutletConfig() {
 		//set outlet-conf -o <outletNo> -n <name> -b <localReboot> -d <delay_on> -f <delay_off>
-		return CommandControl.SET_OUTLET_CONFIG.getName() + String.format(PDUConstant.PARAM_OUTLET_CONFIG, id, name, localReboot, powerOnDelay, powerOffDelay);
+		return PakedgePDUUtil.getControlCommand(ControllingMetric.OUTLET_CONF) + String.format(PDUConstant.PARAM_OUTLET_CONFIG, id, name, localReboot, powerOnDelay, powerOffDelay);
 	}
 
 	/**

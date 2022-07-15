@@ -7,9 +7,10 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.alerts;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.AlertOutletEnum;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.ControllingMetric;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PakedgePDUUtil;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dropdownlist.EnumTypeHandler;
 
 /**
@@ -176,7 +177,8 @@ public class AlertOutlet {
 	public String getParamRequestOfAlertOutlet() {
 		// set alerts-outlet -o <outletNo> -a <currentMin> -b <currentMax> -c <alertTtype> -d
 		//<powMin> -e <powMax> -f <alertTtype>
-		return CommandControl.SET_ALERT_OUTLET.getName() + String.format(PDUConstant.PARAM_ALERT_OUTLET, id, currentMin, currentMax, EnumTypeHandler.getValueByStringArray(getCurrentAlert()), powerMin,
+		return PakedgePDUUtil.getControlCommand(ControllingMetric.ALTER_OUTLET) + String.format(PDUConstant.PARAM_ALERT_OUTLET, id, currentMin, currentMax,
+				EnumTypeHandler.getValueByStringArray(getCurrentAlert()), powerMin,
 				powerMax, EnumTypeHandler.getValueByStringArray(getPowerAlert()));
 	}
 

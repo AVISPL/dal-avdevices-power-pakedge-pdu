@@ -7,9 +7,10 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.alerts;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.AlertGlobalEnum;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.ControllingMetric;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PakedgePDUUtil;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dropdownlist.EnumTypeHandler;
 
 /**
@@ -326,7 +327,7 @@ public class AlertGlobal {
 		//set alerts-global - a <voltageMin> -b <voltageMax> -c <alertType> -d <powMin> -e <powMax>
 		//-f <alertType> -l <tempMin> -h <tempMax> -t <alertType> -p <currentMin> -q <currentMax>
 		//-r <alertType
-		return CommandControl.SET_ALERT_GLOBAL.getName() +
+		return PakedgePDUUtil.getControlCommand(ControllingMetric.ALTER_GLOBAL) +
 				String.format(PDUConstant.PARAM_ALERT_GLOBAL, voltageMin, voltageMax, EnumTypeHandler.getValueByStringArray(getVoltageAlert()), powerMin, powerMax,
 						EnumTypeHandler.getValueByStringArray(getPowerAlert()), tempMin, tempMax, EnumTypeHandler.getValueByStringArray(getTempAlert()), currentMin, currentMax,
 						EnumTypeHandler.getValueByStringArray(getCurrentAlert()));

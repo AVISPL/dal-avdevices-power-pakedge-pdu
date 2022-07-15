@@ -7,9 +7,10 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.dto.pdu;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.ControllingMetric;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUConstant;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PDUDisplayEnum;
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common.PakedgePDUUtil;
 
 /**
  * PDUDisplay class provides during the monitoring and controlling process
@@ -111,7 +112,7 @@ public class PDUDisplay {
 	 */
 	public String getParamRequestOfPDUDisplay() {
 		//command control: set pdu-display -v <oled> -c <oled_contrast> -l <led_status>
-		return CommandControl.SET_PDU_DISPLAY + String.format(PDUConstant.PARAM_PDU_DISPLAY, oledEnabled, oledContrast, led);
+		return PakedgePDUUtil.getControlCommand(ControllingMetric.PDU) + String.format(PDUConstant.PARAM_PDU_DISPLAY, oledEnabled, oledContrast, led);
 	}
 
 	/**

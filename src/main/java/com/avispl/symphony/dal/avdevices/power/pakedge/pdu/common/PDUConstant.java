@@ -58,6 +58,7 @@ public class PDUConstant {
 	public static final String PARAM_DASH_O = " -o ";
 	public static final String PARAM_DASH_R = " -r ";
 	public static final String PARAM_DASH_U = " -u ";
+	public static final String QUOTATION_MARKS = "\"\"";
 	public static final String[] OUTLET_ID_LIST = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 	public static final int MIN_LIMIT = 5;
 	public static final int MAX_LIMIT = 240;
@@ -93,5 +94,9 @@ public class PDUConstant {
 	public static final String PARAM_OUTLET_AUTO_PING = " -o %s -e %s -d %s -t %s -i %s -l %s -p %s -a %s -n %s";
 	public static final String PARAM_OUTLET_CONFIG = " -o %s -n %s -b %s -d %s -f %s";
 	public static final String PARAM_PDU_DISPLAY = " -v %s -c %s -l %s";
+	public static final String CONNECTION_REFUSED = "connection refused";
+	public static final String CONNECTION_TIMEOUT = "connect timed out";
+	public static final String CONNECTION_REFUSED_MESSAGE = "Failed to connect to connection refused";
+	public static final String CONNECTION_TIMEOUT_MESSAGE = "Timeout: socket is not established";
 
 }

@@ -6,6 +6,7 @@ package com.avispl.symphony.dal.avdevices.power.pakedge.pdu.common;
 
 import java.util.Objects;
 
+import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandControl;
 import com.avispl.symphony.dal.avdevices.power.pakedge.pdu.command.CommandMonitor;
 
 /**
@@ -61,4 +62,42 @@ public class PakedgePDUUtil {
 		}
 	}
 
+	/**
+	 * Retrieves the command for controlling process
+	 *
+	 * @param metric is instance of ControllingMetric
+	 * @return String is full command for controlling request
+	 * @throws IllegalArgumentException if the name is not supported
+	 */
+	public static String getControlCommand(ControllingMetric metric) {
+		Objects.requireNonNull(metric);
+
+		switch (metric) {
+			case ALTER_GLOBAL:
+				return CommandControl.SET_ALERT_GLOBAL.getName();
+			case PDU:
+				return CommandControl.SET_PDU_DISPLAY.getName();
+			case CREATE_EVENT:
+			case OUTLET_SCHEDULER_EVENT:
+				return CommandControl.SET_OUTLET_SCHEDULER.getName();
+			case ALTER_EMAIL:
+				return CommandControl.SET_ALERT_EMAIL.getName();
+			case ALTER_OUTLET:
+				return CommandControl.SET_ALERT_OUTLET.getName();
+			case OUTLET_AUTO_PING:
+				return CommandControl.SET_OUTLET_AUTO_PING.getName();
+			case OUTLET_CONF:
+				return CommandControl.SET_OUTLET_CONFIG.getName();
+			case RESET_PEAK:
+				return CommandControl.SET_RESET_PEAK.getName();
+			case POWER_STATUS:
+				return CommandControl.SET_POWER_STATUS.getName();
+			case TEMP_UNIT:
+				return CommandControl.SET_TEMP_UNIT.getName();
+			case DELETE_EVENT:
+				return CommandControl.SET_DELETE_EVENT.getName();
+			default:
+				throw new IllegalArgumentException("Unsupported control command: " + metric.name());
+		}
+	}
 }
