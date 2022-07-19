@@ -570,7 +570,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				throw new ResourceNotReachableException(responseControlDataWrapper.getMsg());
 			}
 		} catch (Exception e) {
-			throw new ResourceNotReachableException(String.format("Error while controlling %s", e.getMessage()));
+			throw new ResourceNotReachableException(String.format("Error while controlling %s", e.getMessage()), e);
 		}
 	}
 
@@ -1348,6 +1348,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 			}
 			retrieveDataDetails(result, metric);
 		} catch (Exception e) {
+			logger.error(String.format(PDUConstant.RETRIEVE_METRIC_ERROR_MESSAGE, metric.getName()), e);
 			failedMonitor.put(metric.getName(), e.getMessage());
 		}
 	}
@@ -1441,7 +1442,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 					throw new IllegalArgumentException("Do not support monitoring metric: : " + metric.name());
 			}
 		} catch (Exception e) {
-			logger.error("Error while convert data: ", e);
+			logger.error("Error while converting data: ", e);
 		}
 	}
 
@@ -1469,6 +1470,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				}
 			}
 		} catch (Exception e) {
+			logger.error(String.format(PDUConstant.RETRIEVE_METRIC_ERROR_MESSAGE, metric.getName()), e);
 			//handle None value if retrieve data failed
 			contributeNoneValueForDeviceInfo(stats);
 			failedMonitor.put(metric.getName(), e.getMessage());
@@ -1504,6 +1506,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				stats.put(MonitoringMetric.TIMEZONE.getName(), timeZoneWrapper.getResponse().getTimezone());
 			}
 		} catch (Exception e) {
+			logger.error(String.format(PDUConstant.RETRIEVE_METRIC_ERROR_MESSAGE, metric.getName()), e);
 			stats.put(MonitoringMetric.TIMEZONE.getName(), PDUConstant.NONE);
 			failedMonitor.put(metric.getName(), e.getMessage());
 		}
@@ -1529,6 +1532,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				stats.put(PDUConstant.DATE, dateAndTimeWrapper.getResponse().getDate());
 			}
 		} catch (Exception e) {
+			logger.error(String.format(PDUConstant.RETRIEVE_METRIC_ERROR_MESSAGE, metric.getName()), e);
 			stats.put(PDUConstant.TIME, PDUConstant.NONE);
 			stats.put(PDUConstant.DATE, PDUConstant.NONE);
 			failedMonitor.put(metric.getName(), e.getMessage());
@@ -1552,6 +1556,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				stats.put(MonitoringMetric.UPTIME.getName(), formatTimeData(uptimeWrapper.getResponse().getUptime()));
 			}
 		} catch (Exception e) {
+			logger.error(String.format(PDUConstant.RETRIEVE_METRIC_ERROR_MESSAGE, metric.getName()), e);
 			stats.put(MonitoringMetric.UPTIME.getName(), PDUConstant.NONE);
 			failedMonitor.put(metric.getName(), e.getMessage());
 		}
@@ -1880,6 +1885,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 				}
 			}
 		} catch (Exception e) {
+			logger.error(String.format(PDUConstant.RETRIEVE_METRIC_ERROR_MESSAGE, metric.getName()), e);
 			failedMonitor.put(metric.getName(), e.getMessage());
 		}
 	}
@@ -2012,6 +2018,7 @@ public class PakedgePDUCommunicator extends TelnetCommunicator implements Monito
 			return value.substring(0, value.indexOf(" "));
 		} catch (Exception e) {
 			//if exception occur (no space in value) we return the initial value
+			logger.error("Error converting value by space", e);
 			return value;
 		}
 	}

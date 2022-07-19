@@ -98,5 +98,6 @@ public class PDUConstant {
 	public static final String CONNECTION_TIMEOUT = "connect timed out";
 	public static final String CONNECTION_REFUSED_MESSAGE = "Failed to connect to connection refused";
 	public static final String CONNECTION_TIMEOUT_MESSAGE = "Timeout: socket is not established";
+	public static final String RETRIEVE_METRIC_ERROR_MESSAGE = "Error while retrieving statistics for metric: %s";
 
 }
